@@ -24,16 +24,10 @@
         <h4>{{ header || 'Welcome' }}</h4>
         <input type="text" v-model="newItem">
         <p>
-            <label for="">
-                <input type="radio" v-model="newItemPriority" value="low">
-                Low
-            </label>
-        </p>
-        <p>
-            <label for="">
-                <input type="radio" v-model="newItemPriority" value="high">
-                High
-            </label>
+            <select name="" id="" v-model="newItemPriority">
+                <option value="low">Low</option>
+                <option value="high">High</option>
+            </select>
         </p>
         <p>{{ newItem }}</p>
         <p>{{ newItemPriority }}</p>
