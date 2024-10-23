@@ -10,7 +10,10 @@
             font: 100 0.75rem monospace;
         }
 
-        h1 {
+        h1,
+        h2,
+        h3,
+        h4 {
             font-weight: 100;
         }
     </style>
@@ -18,7 +21,22 @@
 
 <body>
     <div id="shopping-list">
-        <h1>{{ header || 'Welcome' }}</h1>
+        <h4>{{ header || 'Welcome' }}</h4>
+        <input type="text" v-model="newItem">
+        <p>
+            <label for="">
+                <input type="radio" v-model="newItemPriority" value="low">
+                Low
+            </label>
+        </p>
+        <p>
+            <label for="">
+                <input type="radio" v-model="newItemPriority" value="high">
+                High
+            </label>
+        </p>
+        <p>{{ newItem }}</p>
+        <p>{{ newItemPriority }}</p>
         <ul>
             <li v-for="(item, index) in items" :key="item.id">{{index}} {{ item.label }}</li>
         </ul>
@@ -29,6 +47,8 @@
             data() {
                 return {
                     header: 'Shopping list app',
+                    newItem: '',
+                    newItemPriority: 'low',
                     items: [
                         { id: 1, label: 'party hats' },
                         { id: 2, label: '2 board games' },
