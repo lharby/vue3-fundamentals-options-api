@@ -1,10 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        body {
+            font: 100 0.75rem monospace;
+        }
+
+        h1 {
+            font-weight: 100;
+        }
+    </style>
 </head>
+
 <body>
     <div id="shopping-list">
         <h1>{{ header || 'Welcome' }}</h1>
@@ -19,9 +30,9 @@
                 return {
                     header: 'Shopping list app',
                     items: [
-                        { id: 1, label: 'party hats'},
-                        { id: 2, label: '2 board games'},
-                        { id: 3, label: '20 cups'}
+                        { id: 1, label: 'party hats' },
+                        { id: 2, label: '2 board games' },
+                        { id: 3, label: '20 cups' }
                     ]
                 }
             }
@@ -29,4 +40,5 @@
             .mount('#shopping-list')
     </script>
 </body>
+
 </html>
