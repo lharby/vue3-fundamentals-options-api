@@ -19,6 +19,7 @@
         </button>
         <div class="add-item-form" v-if="editing">
             <input type="text" v-model="newItem" @keyup.enter="saveItem">
+            <p class="counter">{{ characterCount }}/20</p>
             <label for="">
                 <input type="checkbox" v-model="newItemHighPriority">
                 High priority
@@ -27,7 +28,9 @@
                 item</button>
         </div>
         <ul>
-            <li v-for="(item, index) in items" :key="item.id">{{index}} {{ item.label }}</li>
+            <li v-for="(item, index) in reversedItems" :key="item.id" @click="togglePurchased(item)"
+                :class="{ strikeout: item.purchased, priority: item.highPriority }" class="static-class">{{index}} {{
+                item.label }}</li>
         </ul>
         <p v-if="items.length === 0">Well done!</p>
     </div>
@@ -42,19 +45,37 @@
                     newItem: '',
                     newItemHighPriority: false,
                     items: [
-                        // { id: 1, label: 'party hats' },
-                        // { id: 2, label: '2 board games' },
-                        // { id: 3, label: '20 cups' }
+                        { id: 1, label: 'party hats', purchased: true, highPriority: false },
+                        { id: 2, label: '2 board games', purchased: false, highPriority: true },
+                        { id: 3, label: '20 cups', purchased: true, highPriority: true }
                     ]
                 }
             },
             methods: {
                 saveItem() {
-                    this.items.push({ id: this.items.length + 1, label: this.newItem })
+                    this.items.push({
+                        id: this.items.length + 1,
+                        label: this.newItem,
+                        highPriority: this.newItemHighPriority
+                    })
                     this.newItem = ''
+                    this.newItemHighPriority = ''
                 },
                 doEdit(editing) {
                     this.editing = editing;
+                    this.newItem = ''
+                    this.newItemHighPriority = ''
+                },
+                togglePurchased(item) {
+                    item.purchased = !item.purchased
+                }
+            },
+            computed: {
+                characterCount() {
+                    return this.newItem.length
+                },
+                reversedItems() {
+                    return [...this.items].reverse()
                 }
             }
         })
